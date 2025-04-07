@@ -37,7 +37,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     iconData: Icons.email_outlined),
                 const SizedBox(height: 12),
                 CustomInputField(
-                    inputText: 'Password', iconData: Icons.lock_outline),
+                    inputText: 'Password',
+                    iconData: Icons.lock_outline,
+                    obsecuretext: true),
                 const SizedBox(height: 5),
                 InkWell(
                   onTap: () {
