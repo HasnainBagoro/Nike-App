@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
+import 'package:nike/Screens/bottom_navbar.dart';
 import 'package:nike/Screens/forget_password.dart';
 import 'package:nike/Screens/signup_screen.dart';
 
@@ -54,7 +55,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text('Forget Password?')),
                 ),
                 const SizedBox(height: 40),
-                Button(text: 'Login', onTap: () {}),
+                Button(
+                    text: 'Login',
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (c) => const BottomNavbar()),
+                        (route) => false,
+                      );
+                    }),
                 const SizedBox(height: 80),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

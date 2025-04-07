@@ -33,24 +33,24 @@ class _CustomInputFieldState extends State<CustomInputField> {
         decoration: InputDecoration(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: Colors.grey),
+            borderSide: const BorderSide(color: Colors.black),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(50),
-            borderSide: const BorderSide(color: Colors.blue),
+            borderSide: const BorderSide(color: Colors.black),
           ),
           hintText: widget.inputText,
           prefixIcon: widget.iconData != null
               ? Icon(
                   widget.iconData,
-                  color: Colors.blue,
+                  color: Colors.black,
                 )
               : null,
           suffixIcon: widget.obsecuretext == true
               ? IconButton(
                   icon: Icon(
                     _isObscured ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.blue,
+                    color: Colors.black,
                   ),
                   onPressed: () {
                     setState(() {

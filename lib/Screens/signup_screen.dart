@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
+import 'package:nike/Screens/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -58,7 +59,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(
               height: 80,
             ),
-            Button(text: 'Signup', onTap: () {}),
+            Button(
+                text: 'Signup',
+                onTap: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      (MaterialPageRoute(builder: (c) => LoginScreen())),
+                      (route) => false);
+                }),
             const SizedBox(
               height: 20,
             ),
