@@ -15,19 +15,47 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        centerTitle: true,
         title: Image.asset(
           'images/logo.png',
           height: 70,
         ),
       ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 300,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Text(
+                      'Hello Nike Lovers',
+                      style: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                    Positioned(
+                      top: 10,
+                      left: 40,
+                      child: Image.asset(
+                        'images/shoe bgr.png',
+                        width: 300,
+                        height: 300,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
