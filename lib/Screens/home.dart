@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nike/Screens/home_cards.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,19 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 350,
-              width: 350,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                  image: AssetImage('images/shoe 1.jpg'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            )
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),

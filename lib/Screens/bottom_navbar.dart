@@ -31,7 +31,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         unselectedItemColor: Colors.grey,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         backgroundColor: Colors.black,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
