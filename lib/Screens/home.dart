@@ -15,15 +15,16 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
         title: Image.asset(
           'images/logo.png',
           height: 70,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Center(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,6 +52,48 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 300,
                       ),
                     ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                'New Arrivals',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: 260,
+                child: ListView(
+                  padding: const EdgeInsets.all(10),
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    HomeCards(
+                        imagePath: 'images/shoe 1.jpg',
+                        title: 'Nike Air Max',
+                        price: '\$500',
+                        onTap: () {}),
+                    const SizedBox(width: 20),
+                    HomeCards(
+                        imagePath: 'images/shoe 1.jpg',
+                        title: 'Nike Air Max',
+                        price: '\$500',
+                        onTap: () {}),
+                    const SizedBox(width: 20),
+                    HomeCards(
+                        imagePath: 'images/shoe 1.jpg',
+                        title: 'Nike Air Max',
+                        price: '\$500',
+                        onTap: () {}),
+                    const SizedBox(width: 20),
+                    HomeCards(
+                        imagePath: 'images/shoe 1.jpg',
+                        title: 'Nike Air Max',
+                        price: '\$500',
+                        onTap: () {})
                   ],
                 ),
               ),

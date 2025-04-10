@@ -16,9 +16,9 @@ class HomeCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 15),
-      width: 320,
-      height: 320,
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+      width: 180,
+      height: 240,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -36,7 +36,7 @@ class HomeCards extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
               imagePath,
-              height: 250,
+              height: 180,
             ),
           ),
           Row(
@@ -48,7 +48,7 @@ class HomeCards extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -56,7 +56,7 @@ class HomeCards extends StatelessWidget {
                   Text(
                     price,
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 12,
                       color: Colors.grey,
                     ),
                   ),
@@ -64,11 +64,12 @@ class HomeCards extends StatelessWidget {
               ),
               CircleAvatar(
                 backgroundColor: Colors.black,
-                radius: 22,
+                radius: 16,
                 child: IconButton(
                   onPressed: () {},
                   icon: Icon(
                     Icons.shopping_cart_outlined,
+                    size: 12,
                     color: Colors.white,
                   ),
                 ),
