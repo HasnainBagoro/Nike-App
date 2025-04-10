@@ -17,8 +17,7 @@ class HomeCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-      width: 180,
-      height: 240,
+      width: 152,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -36,7 +35,7 @@ class HomeCards extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: Image.asset(
               imagePath,
-              height: 180,
+              height: 120,
             ),
           ),
           Row(
