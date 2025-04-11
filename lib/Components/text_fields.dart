@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomInputField extends StatefulWidget {
   final String? inputText;
@@ -40,6 +41,11 @@ class _CustomInputFieldState extends State<CustomInputField> {
             borderSide: const BorderSide(color: Colors.black),
           ),
           hintText: widget.inputText,
+          hintStyle: GoogleFonts.bebasNeue(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey,
+          ),
           prefixIcon: widget.iconData != null
               ? Icon(
                   widget.iconData,

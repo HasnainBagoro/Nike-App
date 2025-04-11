@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nike/Screens/cart_screen.dart';
 import 'package:nike/Screens/home.dart';
 import 'package:nike/Screens/search.dart';
 
@@ -15,7 +16,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
   List screens = [
     const HomeScreen(),
     const SearchScreen(),
-    const Placeholder(),
+    const CartScreen(),
     const Placeholder(),
   ];
   @override
@@ -31,12 +32,12 @@ class _BottomNavbarState extends State<BottomNavbar> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
-        unselectedLabelStyle: GoogleFonts.poppins(
+        unselectedLabelStyle: GoogleFonts.bebasNeue(
           fontSize: 12,
           fontWeight: FontWeight.w500,
         ),
-        selectedLabelStyle: GoogleFonts.poppins(
-          fontSize: 12,
+        selectedLabelStyle: GoogleFonts.bebasNeue(
+          fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
         backgroundColor: Colors.black,

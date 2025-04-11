@@ -47,19 +47,15 @@ class HomeCards extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.poppins(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600
-                    ),
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: 15, fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(height: 5),
                   Text(
                     price,
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey
-                    ),
+                    style: GoogleFonts.bebasNeue(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey),
                   ),
                 ],
               ),

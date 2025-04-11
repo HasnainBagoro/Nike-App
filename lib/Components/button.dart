@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Button extends StatelessWidget {
   final String text;
@@ -19,8 +20,11 @@ class Button extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+            style: GoogleFonts.bebasNeue(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
           ),
         ),
       ),

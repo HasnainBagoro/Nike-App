@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
 import 'package:nike/Screens/login_screen.dart';
@@ -29,9 +30,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               width: 150,
               height: 150,
             ),
-            const Text(
+            Text(
               'Signup',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: GoogleFonts.bebasNeue(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(
               height: 50,
@@ -74,22 +78,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Already have an account?',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
+                  style:
+                      GoogleFonts.bebasNeue(fontSize: 18, color: Colors.grey),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text(
+                  child: Text(
                     'Login',
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: GoogleFonts.bebasNeue(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ],

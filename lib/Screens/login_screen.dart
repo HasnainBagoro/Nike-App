@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
 import 'package:nike/Screens/bottom_navbar.dart';
@@ -29,9 +30,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: 150,
                   height: 150,
                 ),
-                const Text(
+                Text(
                   'Welcome Back',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.bebasNeue(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 100),
                 CustomInputField(
@@ -52,8 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     );
                   },
                   child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Text('Forget Password?')),
+                    alignment: Alignment.centerRight,
+                    child: Text('Forget Password?',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 14,
+                        )),
+                  ),
                 ),
                 const SizedBox(height: 40),
                 Button(
@@ -71,7 +79,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Text(
                       'Dont have an account?',
-                      style: TextStyle(fontSize: 16),
+                      style: GoogleFonts.bebasNeue(
+                          fontSize: 18, color: Colors.grey),
                     ),
                     const SizedBox(width: 8),
                     InkWell(
@@ -81,10 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         'Signup',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 18,
                         ),
                       ),
                     )
