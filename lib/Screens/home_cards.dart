@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeCards extends StatelessWidget {
   final String imagePath;
@@ -46,17 +47,18 @@ class HomeCards extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                    style: GoogleFonts.poppins(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600
                     ),
                   ),
                   SizedBox(height: 5),
                   Text(
                     price,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 12,
-                      color: Colors.grey,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey
                     ),
                   ),
                 ],

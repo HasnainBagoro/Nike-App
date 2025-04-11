@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -35,9 +36,13 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 150,
               height: 150,
             ),
-            const Text(
+            Text(
               'Nike',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: GoogleFonts.bebasNeue(
+              fontSize: 40,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

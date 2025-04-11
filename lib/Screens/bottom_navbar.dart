@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Screens/home.dart';
+import 'package:nike/Screens/search.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
@@ -12,7 +14,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
   int selectedIndex = 0;
   List screens = [
     const HomeScreen(),
-    const Placeholder(),
+    const SearchScreen(),
     const Placeholder(),
     const Placeholder(),
   ];
@@ -29,7 +31,14 @@ class _BottomNavbarState extends State<BottomNavbar> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        unselectedLabelStyle: GoogleFonts.poppins(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
+        selectedLabelStyle: GoogleFonts.poppins(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+        ),
         backgroundColor: Colors.black,
         items: [
           BottomNavigationBarItem(

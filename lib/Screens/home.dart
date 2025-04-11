@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Screens/home_cards.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,16 +32,16 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
+              SizedBox(
                 height: 300,
                 width: double.infinity,
                 child: Stack(
                   children: [
                     Text(
                       'Hello Nike Lovers',
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontWeight: FontWeight.w900,
+                      style: GoogleFonts.bebasNeue(
+                        fontSize: 65,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Positioned(
@@ -60,7 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Text(
                 'New Arrivals',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: GoogleFonts.bebasNeue(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(
                 height: 20,
