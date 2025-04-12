@@ -66,7 +66,7 @@ class HomeCards extends StatelessWidget {
                   onPressed: () {},
                   icon: Icon(
                     Icons.shopping_cart_outlined,
-                    size: 12,
+                    size: 16,
                     color: Colors.white,
                   ),
                 ),

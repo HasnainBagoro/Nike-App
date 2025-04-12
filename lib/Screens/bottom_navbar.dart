@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Screens/cart_screen.dart';
 import 'package:nike/Screens/home.dart';
+import 'package:nike/Screens/profile.dart';
 import 'package:nike/Screens/search.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -17,7 +18,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     const HomeScreen(),
     const SearchScreen(),
     const CartScreen(),
-    const Placeholder(),
+    const ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {
