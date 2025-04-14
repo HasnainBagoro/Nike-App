@@ -13,6 +13,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -20,15 +21,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void signUpUser() async {
+    final fullName = fullNameController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
 
-    print('Email: $email');
-    print('Password: $password');
-    print('Confirm Password: $confirmPassword');
-
-    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty || fullName.isEmpty) {
       showSnackBar('Please fill all fields');
       return;
     }
@@ -88,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               CustomInputField(
                 inputText: 'Full Name',
                 iconData: Icons.person_outline_rounded,
-                controller: TextEditingController(), // optional if not used
+                controller: fullNameController, // optional if not used
               ),
               const SizedBox(height: 10),
               CustomInputField(
@@ -126,7 +124,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>
+                        LoginScreen()));
                     },
                     child: Text(
                       'Login',

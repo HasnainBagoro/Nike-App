@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Screens/login_screen.dart';
+import 'package:nike/Screens/signup_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void delayScreen() {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (c) => LoginScreen()), (route) => false);
+          MaterialPageRoute(builder: (c) => SignUpScreen()), (route) => false);
     });
   }
 
