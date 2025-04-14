@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomInputField extends StatefulWidget {
+  final TextEditingController? controller;
   final String? inputText;
   final IconData? iconData;
   final bool? obsecuretext;
 
   const CustomInputField({
+    this.controller,
     super.key,
     this.inputText,
     this.iconData,
@@ -30,6 +32,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
+        controller: widget.controller,
         obscureText: _isObscured,
         decoration: InputDecoration(
           border: OutlineInputBorder(
