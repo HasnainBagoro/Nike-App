@@ -19,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   bool isLoading = false;
-
   String? errorMessage;
 
   Future<void> signInUser() async {
@@ -91,8 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
+    } finally {
       setState(() {
-        errorMessage = e.message ?? 'An error occurred. Please try again.';
+        isLoading = false;
       });
     }
   }
@@ -101,87 +102,97 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'images/logo.png',
-                  width: 150,
-                  height: 150,
-                ),
-                Text(
-                  'Welcome Back',
-                  style: GoogleFonts.bebasNeue(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 100),
-                CustomInputField(
-                    inputText: 'Username or Email',
-                    iconData: Icons.email_outlined,
-                    controller: emailController),
-                const SizedBox(height: 12),
-                CustomInputField(
-                    inputText: 'Password',
-                    iconData: Icons.lock_outline,
-                    obsecuretext: true,
-                    controller: passwordController),
-                const SizedBox(height: 5),
-                InkWell(
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (c) => ForgetPasswordScreen()),
-                      (route) => false,
-                    );
-                  },
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Text('Forget Password?',
+      body: isLoading == true
+          ? Center(
+              child: CircularProgressIndicator(
+              strokeCap: StrokeCap.round,
+              color: Colors.black,
+              strokeWidth: 10,),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'images/logo.png',
+                        width: 150,
+                        height: 150,
+                      ),
+                      Text(
+                        'Welcome Back',
                         style: GoogleFonts.bebasNeue(
-                          fontSize: 14,
-                        )),
-                  ),
-                ),
-                const SizedBox(height: 40),
-                Button(
-                  text: 'Login',
-                  onTap: signInUser,
-                ),
-                const SizedBox(height: 80),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Dont have an account?',
-                      style: GoogleFonts.bebasNeue(
-                          fontSize: 18, color: Colors.grey),
-                    ),
-                    const SizedBox(width: 8),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (c) => SignUpScreen()));
-                      },
-                      child: Text(
-                        'Signup',
-                        style: GoogleFonts.bebasNeue(
-                          fontSize: 18,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    )
-                  ],
+                      const SizedBox(height: 100),
+                      CustomInputField(
+                          inputText: 'Username or Email',
+                          iconData: Icons.email_outlined,
+                          controller: emailController),
+                      const SizedBox(height: 12),
+                      CustomInputField(
+                          inputText: 'Password',
+                          iconData: Icons.lock_outline,
+                          obsecuretext: true,
+                          controller: passwordController),
+                      const SizedBox(height: 5),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (c) => ForgetPasswordScreen()),
+                            (route) => false,
+                          );
+                        },
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text('Forget Password?',
+                              style: GoogleFonts.bebasNeue(
+                                fontSize: 14,
+                              )),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      Button(
+                        text: 'Login',
+                        onTap: signInUser,
+                      ),
+                      const SizedBox(height: 80),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Dont have an account?',
+                            style: GoogleFonts.bebasNeue(
+                                fontSize: 18, color: Colors.grey),
+                          ),
+                          const SizedBox(width: 8),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (c) => SignUpScreen()));
+                            },
+                            child: Text(
+                              'Signup',
+                              style: GoogleFonts.bebasNeue(
+                                fontSize: 18,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

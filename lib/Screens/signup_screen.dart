@@ -18,6 +18,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
+  bool isLoading = false;
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void signUpUser() async {
@@ -25,6 +27,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
+
+    setState(() {
+      isLoading = true;
+    });
 
     if (email.isEmpty ||
         password.isEmpty ||
@@ -49,7 +55,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       User? user = userCredential.user;
       if (user != null && !user.emailVerified) {
         await user.sendEmailVerification();
-        showSnackBar('Verification email sent. Please check your inbox.');
       }
 
       Navigator.pushAndRemoveUntil(
@@ -59,6 +64,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
     } on FirebaseAuthException catch (e) {
       showSnackBar(e.message ?? 'Signup failed');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -72,84 +81,93 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 40),
-              Image.asset(
-                'images/logo.png',
-                width: 150,
-                height: 150,
-              ),
-              Text(
-                'Signup',
-                style: GoogleFonts.bebasNeue(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 50),
-              CustomInputField(
-                inputText: 'Full Name',
-                iconData: Icons.person_outline_rounded,
-                controller: fullNameController, // optional if not used
-              ),
-              const SizedBox(height: 10),
-              CustomInputField(
-                inputText: 'Email Address',
-                iconData: Icons.email_outlined,
-                controller: emailController,
-              ),
-              const SizedBox(height: 10),
-              CustomInputField(
-                inputText: 'Password',
-                iconData: Icons.lock_outline_rounded,
-                obsecuretext: true,
-                controller: passwordController,
-              ),
-              const SizedBox(height: 10),
-              CustomInputField(
-                inputText: 'Confirm Password',
-                iconData: Icons.lock_outline_rounded,
-                obsecuretext: true,
-                controller: confirmPasswordController,
-              ),
-              const SizedBox(height: 80),
-              Button(
-                text: 'Signup',
-                onTap: signUpUser,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Already have an account?',
-                    style:
-                        GoogleFonts.bebasNeue(fontSize: 18, color: Colors.grey),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (c) => LoginScreen()));
-                    },
-                    child: Text(
-                      'Login',
+      body: isLoading == true
+          ? Center(
+              child: CircularProgressIndicator(
+              strokeCap: StrokeCap.round,
+              color: Colors.black,
+              strokeWidth: 10,
+            ))
+          : SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 40),
+                    Image.asset(
+                      'images/logo.png',
+                      width: 150,
+                      height: 150,
+                    ),
+                    Text(
+                      'Signup',
                       style: GoogleFonts.bebasNeue(
-                        fontSize: 18,
-                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 50),
+                    CustomInputField(
+                      inputText: 'Full Name',
+                      iconData: Icons.person_outline_rounded,
+                      controller: fullNameController, // optional if not used
+                    ),
+                    const SizedBox(height: 10),
+                    CustomInputField(
+                      inputText: 'Email Address',
+                      iconData: Icons.email_outlined,
+                      controller: emailController,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomInputField(
+                      inputText: 'Password',
+                      iconData: Icons.lock_outline_rounded,
+                      obsecuretext: true,
+                      controller: passwordController,
+                    ),
+                    const SizedBox(height: 10),
+                    CustomInputField(
+                      inputText: 'Confirm Password',
+                      iconData: Icons.lock_outline_rounded,
+                      obsecuretext: true,
+                      controller: confirmPasswordController,
+                    ),
+                    const SizedBox(height: 80),
+                    Button(
+                      text: 'Signup',
+                      onTap: signUpUser,
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Already have an account?',
+                          style: GoogleFonts.bebasNeue(
+                              fontSize: 18, color: Colors.grey),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (c) => LoginScreen()));
+                          },
+                          child: Text(
+                            'Login',
+                            style: GoogleFonts.bebasNeue(
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }
