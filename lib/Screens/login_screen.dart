@@ -18,6 +18,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  bool isLoading = false;
+
   String? errorMessage;
 
   Future<void> signInUser() async {
@@ -26,55 +28,53 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (email.isEmpty || password.isEmpty) {
       setState(() {
-      errorMessage = 'Please fill all fields';
+        errorMessage = 'Please fill all fields';
       });
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-        content: Text('Please fill all fields'),
-        ),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please fill all fields'),
+          ),
+        );
       });
       return;
     }
 
     if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)) {
       setState(() {
-      errorMessage = 'Invalid email format';
+        errorMessage = 'Invalid email format';
       });
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-        content: Text('Invalid email format'),
-        ),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Invalid email format'),
+          ),
+        );
       });
       return;
     }
 
     if (password.length < 6) {
       setState(() {
-      errorMessage = 'Password must be at least 6 characters';
+        errorMessage = 'Password must be at least 6 characters';
       });
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-        content: Text('Password must be at least 6 characters'),
-        ),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Password must be at least 6 characters'),
+          ),
+        );
       });
       return;
     }
 
-    
-
     if (errorMessage != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-        content: Text(errorMessage!),
-        ),
-      );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage!),
+          ),
+        );
       });
     }
 
@@ -95,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
         errorMessage = e.message ?? 'An error occurred. Please try again.';
       });
     }
-
   }
 
   @override

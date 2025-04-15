@@ -33,6 +33,10 @@ class _CustomInputFieldState extends State<CustomInputField> {
     return Container(
       child: TextField(
         controller: widget.controller,
+        style: GoogleFonts.bebasNeue(
+          fontSize: 18,
+          color: Colors.black,
+        ),
         obscureText: _isObscured,
         decoration: InputDecoration(
           border: OutlineInputBorder(

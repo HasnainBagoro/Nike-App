@@ -26,7 +26,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final password = passwordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty || fullName.isEmpty) {
+    if (email.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty ||
+        fullName.isEmpty) {
       showSnackBar('Please fill all fields');
       return;
     }
@@ -37,12 +40,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
     try {
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      // Navigate to login screen after successful signup
+      User? user = userCredential.user;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+        showSnackBar('Verification email sent. Please check your inbox.');
+      }
+
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (c) => LoginScreen()),
@@ -124,8 +133,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (c)=>
-                        LoginScreen()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (c) => LoginScreen()));
                     },
                     child: Text(
                       'Login',
