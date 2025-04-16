@@ -78,6 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
+      // ignore: unused_local_variable
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -85,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       Navigator.pushAndRemoveUntil(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (c) => const BottomNavbar()),
         (route) => false,
