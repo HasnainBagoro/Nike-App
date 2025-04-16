@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
+import 'package:nike/Models/user_model.dart';
 import 'package:nike/Screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -21,6 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isLoading = false;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void signUpUser() async {
     final fullName = fullNameController.text.trim();
@@ -46,10 +49,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
 
     try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
+      final UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+
+      final String uid = userCredential.user!.uid;
+
+      UserModel userData = UserModel(username: 'username', email: email);
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .set(userData.toMap());
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Signup Successful")),
       );
 
       User? user = userCredential.user;
