@@ -77,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     }
 
+
     try {
       // ignore: unused_local_variable
       UserCredential userCredential =
@@ -84,6 +85,8 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email,
         password: password,
       );
+
+
 
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
