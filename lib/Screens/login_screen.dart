@@ -85,16 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
         password: password,
       );
 
-      if (userCredential.user != null && userCredential.user!.emailVerified) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (c) => BottomAppBar()),
-            (route) => false);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User is not verified or not exist.')));
-      }
-
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
         context,

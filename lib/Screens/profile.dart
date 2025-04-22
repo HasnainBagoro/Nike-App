@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Components/profile_fields.dart';
@@ -11,6 +12,17 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  var auth = FirebaseAuth.instance;
+  Future<void> logout() async {
+    try {
+      await auth.signOut();
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (c) => LoginScreen()), (route) => false);
+    } on FirebaseAuthException catch (e) {
+      debugPrint("this is the error${e.code}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,21 +48,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(
                         height: 140,
                       ),
-                       ProfileFields(
+                      ProfileFields(
                         profileText: 'Edit Profile',
                         profileIcon: Icon(Icons.edit, color: Colors.white),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                       ProfileFields(
+                      ProfileFields(
                         profileText: 'Change Password',
                         profileIcon: Icon(Icons.lock, color: Colors.white),
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                       ProfileFields(
+                      ProfileFields(
                         profileText: 'My Orders',
                         profileIcon:
                             Icon(Icons.shopping_bag, color: Colors.white),
@@ -58,19 +70,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                       ProfileFields(
+                      ProfileFields(
                         profileText: 'Logout',
-                        profileIcon: Icon(Icons.logout, color: Colors.white,),
+                        profileIcon: Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
                         ontap: () {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
-                            (route) => false,
-                          );
+                          logout();
                         },
                       ),
-                      
                     ],
                   ),
                 ),
