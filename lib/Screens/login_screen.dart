@@ -77,7 +77,6 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     }
 
-
     try {
       // ignore: unused_local_variable
       UserCredential userCredential =
@@ -86,7 +85,15 @@ class _LoginScreenState extends State<LoginScreen> {
         password: password,
       );
 
-
+      if (userCredential.user != null && userCredential.user!.emailVerified) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (c) => BottomAppBar()),
+            (route) => false);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('User is not verified or not exist.')));
+      }
 
       Navigator.pushAndRemoveUntil(
         // ignore: use_build_context_synchronously
@@ -110,9 +117,10 @@ class _LoginScreenState extends State<LoginScreen> {
       body: isLoading == true
           ? Center(
               child: CircularProgressIndicator(
-              strokeCap: StrokeCap.round,
-              color: Colors.black,
-              strokeWidth: 10,),
+                strokeCap: StrokeCap.round,
+                color: Colors.black,
+                strokeWidth: 10,
+              ),
             )
           : Padding(
               padding: const EdgeInsets.all(15.0),
