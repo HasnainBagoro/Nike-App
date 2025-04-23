@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nike/Components/profile_fields.dart';
+import 'package:nike/Screens/items_screen.dart';
 import 'package:nike/Screens/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -63,9 +64,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 20,
                       ),
                       ProfileFields(
-                        profileText: 'My Orders',
-                        profileIcon:
-                            Icon(Icons.shopping_bag, color: Colors.white),
+                        profileText: 'List Items',
+                        profileIcon: Icon(Icons.add, color: Colors.white),
+                        ontap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (c) => ListingItems()));
+                        },
                       ),
                       const SizedBox(
                         height: 20,

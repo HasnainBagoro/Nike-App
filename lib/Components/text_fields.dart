@@ -4,11 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomInputField extends StatefulWidget {
   final TextEditingController? controller;
   final String? inputText;
+  final int maxLines;
   final IconData? iconData;
   final bool? obsecuretext;
 
   const CustomInputField({
     this.controller,
+    this.maxLines = 1,
     super.key,
     this.inputText,
     this.iconData,
@@ -33,6 +35,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
     return Container(
       child: TextField(
         controller: widget.controller,
+        maxLines: widget.maxLines,
         style: GoogleFonts.bebasNeue(
           fontSize: 18,
           color: Colors.black,
@@ -40,7 +43,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
         obscureText: _isObscured,
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(color: Colors.black),
           ),
           focusedBorder: OutlineInputBorder(
