@@ -16,6 +16,14 @@ class ListingItemsState extends State<ListingItems> {
   var itemPriController = TextEditingController();
 
   @override
+  void dispose() {
+    itemNameController.dispose();
+    itemDesController.dispose();
+    itemPriController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
