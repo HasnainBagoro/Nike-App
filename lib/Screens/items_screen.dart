@@ -37,16 +37,16 @@ class ListingItemsState extends State<ListingItems> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey,
-                  ),
-                  child: Center(
+              Container(
+                height: 200,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey,
+                ),
+                child: Center(
+                  child: InkWell(
+                    onTap: () {},
                     child: Icon(
                       Icons.add_a_photo_rounded,
                       size: 50,
