@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,14 +21,14 @@ class ListingItemsState extends State<ListingItems> {
   var itemNameController = TextEditingController();
   var itemDesController = TextEditingController();
   var itemPriController = TextEditingController();
-   XFile? imageFile;
+  XFile? imageFile;
   final ImagePicker picker = ImagePicker();
   bool isLoading = false;
   var firestore = FirebaseFirestore.instance;
   Future<void> pickImage() async {
     try {
       final XFile? selectedImage =
-          await picker.pickImage(source: ImageSource.camera);
+          await picker.pickImage(source: ImageSource.gallery);
       setState(() {
         imageFile = selectedImage;
       });
@@ -44,7 +46,8 @@ class ListingItemsState extends State<ListingItems> {
       var productId = Uuid().v1();
       Items items = Items(
           name: itemNameController.text,
-          imageUrl: "https://t3.ftcdn.net/jpg/01/21/81/86/240_F_121818673_6EID5iF76VCCc4aGOLJkd94Phnggre3o.jpg",
+          imageUrl:
+              "https://t3.ftcdn.net/jpg/01/21/81/86/240_F_121818673_6EID5iF76VCCc4aGOLJkd94Phnggre3o.jpg",
           descritpion: itemDesController.text,
           price: itemPriController.text,
           productId: productId);
@@ -88,23 +91,35 @@ class ListingItemsState extends State<ListingItems> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey,
-                ),
-                child: Center(
-                  child: InkWell(
-                    onTap: () {},
-                    child: Icon(
-                      Icons.add_a_photo_rounded,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+              InkWell(
+                onTap: () {
+                  pickImage();
+                },
+                child: imageFile != null
+                    ? Container(
+                        height: 200,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: FileImage(File(imageFile!.path)),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        height: 200,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.grey,
+                        ),
+                        child: Icon(
+                          Icons.add_a_photo,
+                          size: 50,
+                          color: Colors.white,
+                        ),
+                      ),
               ),
               const SizedBox(
                 height: 40,
@@ -143,7 +158,21 @@ class ListingItemsState extends State<ListingItems> {
               const SizedBox(
                 height: 70,
               ),
-              Button(text: 'List item', onTap: () {})
+              Button(
+                  text: 'List item',
+                  onTap: () {
+                    if (itemNameController.text.isNotEmpty &&
+                        itemDesController.text.isNotEmpty &&
+                        itemPriController.text.isNotEmpty) {
+                      uploadData();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please fill all fields'),
+                        ),
+                      );
+                    }
+                  })
             ],
           ),
         )),
