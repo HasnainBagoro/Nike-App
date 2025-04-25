@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
+import 'package:nike/Models/iteams_model.dart';
+import 'package:nike/Screens/upload.dart';
+import 'package:uuid/uuid.dart';
 
 class ListingItems extends StatefulWidget {
   const ListingItems({super.key});
@@ -14,6 +19,44 @@ class ListingItemsState extends State<ListingItems> {
   var itemNameController = TextEditingController();
   var itemDesController = TextEditingController();
   var itemPriController = TextEditingController();
+   XFile? imageFile;
+  final ImagePicker picker = ImagePicker();
+  bool isLoading = false;
+  var firestore = FirebaseFirestore.instance;
+  Future<void> pickImage() async {
+    try {
+      final XFile? selectedImage =
+          await picker.pickImage(source: ImageSource.camera);
+      setState(() {
+        imageFile = selectedImage;
+      });
+    } catch (e) {
+      debugPrint("Error while picking image: $e");
+    }
+  }
+
+  void uploadData() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      var imageUrl = uploadImageToFirebaseStorage(imageFile!);
+      var productId = Uuid().v1();
+      Items items = Items(
+          name: itemNameController.text,
+          imageUrl: "https://t3.ftcdn.net/jpg/01/21/81/86/240_F_121818673_6EID5iF76VCCc4aGOLJkd94Phnggre3o.jpg",
+          descritpion: itemDesController.text,
+          price: itemPriController.text,
+          productId: productId);
+      await firestore.collection("products").doc(productId).set(items.toJson());
+    } catch (e) {
+      debugPrint("Error while uploading data: $e");
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   void dispose() {
