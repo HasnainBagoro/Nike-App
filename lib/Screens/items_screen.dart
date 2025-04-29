@@ -48,7 +48,7 @@ class ListingItemsState extends State<ListingItems> {
           name: itemNameController.text,
           imageUrl:
               "https://t3.ftcdn.net/jpg/01/21/81/86/240_F_121818673_6EID5iF76VCCc4aGOLJkd94Phnggre3o.jpg",
-          descritpion: itemDesController.text,
+          description: itemDesController.text,
           price: itemPriController.text,
           productId: productId);
       await firestore.collection("products").doc(productId).set(items.toJson());

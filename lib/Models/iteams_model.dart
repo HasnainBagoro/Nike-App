@@ -1,13 +1,13 @@
 class Items {
   final String name;
   final String imageUrl;
-  final String descritpion;
+  final String description;
   final String price;
   final String productId;
   Items({
     required this.name,
     required this.imageUrl,
-    required this.descritpion,
+    required this.description,
     required this.price,
     required this.productId,
   });
@@ -15,7 +15,7 @@ class Items {
     return {
       "name": name,
       "imageUrl": imageUrl,
-      "descritpion": descritpion,
+      "description": description,
       "price": price,
       "productId": productId,
     };
@@ -25,7 +25,7 @@ class Items {
     return Items(
       name: map['name'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
-      descritpion: map['descritpion'] ?? '',
+      description: map['description'] ?? '',
       price: map['price'] ?? '',
       productId: map['productId'] ?? '',
     );

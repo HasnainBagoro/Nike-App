@@ -16,64 +16,67 @@ class HomeCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
-      width: 152,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 2,
-            offset: const Offset(0, 0),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              imagePath,
-              height: 120,
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(15, 0, 15, 15),
+        width: 152,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 2,
+              offset: const Offset(0, 0),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: GoogleFonts.bebasNeue(
-                        fontSize: 15, fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    price,
-                    style: GoogleFonts.bebasNeue(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey),
-                  ),
-                ],
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                imagePath,
+                height: 120,
               ),
-              CircleAvatar(
-                backgroundColor: Colors.black,
-                radius: 16,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 16,
-                    color: Colors.white,
-                  ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: GoogleFonts.bebasNeue(
+                          fontSize: 15, fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      price,
+                      style: GoogleFonts.bebasNeue(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey),
+                    ),
+                  ],
                 ),
-              )
-            ],
-          )
-        ],
+                CircleAvatar(
+                  backgroundColor: Colors.black,
+                  radius: 16,
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
