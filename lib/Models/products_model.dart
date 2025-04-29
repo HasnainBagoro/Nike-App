@@ -2,14 +2,14 @@ class Products {
   final String id;
   final String name;
   final String imageUrl;
-  final String descritpion;
+  final String description;
   final String price;
 
   Products({
     required this.id,
     required this.name,
     required this.imageUrl,
-    required this.descritpion,
+    required this.description,
     required this.price,
   });
 
@@ -18,7 +18,7 @@ class Products {
       'id': id,
       'name': name,
       'imageUrl': imageUrl,
-      'descritpion': descritpion,
+      'descritpion': description,
       'price': price,
     };
   }
@@ -28,7 +28,7 @@ class Products {
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
-      descritpion: map['descritpion'] ?? '',
+      description: map['description'] ?? '',
       price: map['price'] ?? '',
     );
   }

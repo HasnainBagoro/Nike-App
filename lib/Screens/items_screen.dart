@@ -47,7 +47,7 @@ class ListingItemsState extends State<ListingItems> {
       Items items = Items(
           name: itemNameController.text,
           imageUrl:
-              "https://t3.ftcdn.net/jpg/01/21/81/86/240_F_121818673_6EID5iF76VCCc4aGOLJkd94Phnggre3o.jpg",
+              "https://www.asphaltgold.com/cdn/shop/files/NvFpHHjtm5BXTQGknxbY_FQ9084-001-Nike-Air-Terra-Humara-SP-Black-Black-Black-os-1_a5d0260e-6363-456f-8636-983bd59334df_1024x1024_crop_center.jpg?v=1726153963",
           description: itemDesController.text,
           price: itemPriController.text,
           productId: productId);

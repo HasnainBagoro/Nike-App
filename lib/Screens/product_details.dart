@@ -51,7 +51,7 @@ class _ProductsDetailsState extends State<ProductsDetails> {
             const SizedBox(
               height: 20,
             ),
-            Text(widget.items.descritpion,
+            Text(widget.items.description,
                 style:
                     GoogleFonts.bebasNeue(fontSize: 20, color: Colors.black)),
             const SizedBox(
