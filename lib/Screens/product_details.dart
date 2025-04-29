@@ -34,6 +34,11 @@ class _ProductsDetailsState extends State<ProductsDetails> {
                   image: DecorationImage(
                       image: NetworkImage(widget.items.imageUrl),
                       fit: BoxFit.cover)),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child:
+                    Icon(Icons.favorite_rounded, color: Colors.grey, size: 40),
+              ),
             ),
             const SizedBox(
               height: 20,

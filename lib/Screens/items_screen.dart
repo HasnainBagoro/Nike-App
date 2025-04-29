@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
 import 'package:nike/Models/iteams_model.dart';
-import 'package:nike/Screens/home.dart';
 import 'package:uuid/uuid.dart';
 
 class ListingItems extends StatefulWidget {
@@ -52,7 +51,7 @@ class ListingItemsState extends State<ListingItems> {
           productId: productId);
       await firestore.collection("products").doc(productId).set(items.toJson());
 
-      Navigator.push(context, MaterialPageRoute(builder: (c) => HomeScreen()));
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Item listed successfully'),
@@ -64,8 +63,6 @@ class ListingItemsState extends State<ListingItems> {
       setState(() {
         isLoading = false;
       });
-
-      
     }
   }
 
