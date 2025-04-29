@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:nike/Components/button.dart';
 import 'package:nike/Components/text_fields.dart';
 import 'package:nike/Models/iteams_model.dart';
-import 'package:nike/Screens/upload.dart';
+import 'package:nike/Screens/home.dart';
 import 'package:uuid/uuid.dart';
 
 class ListingItems extends StatefulWidget {
@@ -42,7 +42,6 @@ class ListingItemsState extends State<ListingItems> {
       isLoading = true;
     });
     try {
-      var imageUrl = uploadImageToFirebaseStorage(imageFile!);
       var productId = Uuid().v1();
       Items items = Items(
           name: itemNameController.text,
@@ -52,12 +51,21 @@ class ListingItemsState extends State<ListingItems> {
           price: itemPriController.text,
           productId: productId);
       await firestore.collection("products").doc(productId).set(items.toJson());
+
+      Navigator.push(context, MaterialPageRoute(builder: (c) => HomeScreen()));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Item listed successfully'),
+        ),
+      );
     } catch (e) {
       debugPrint("Error while uploading data: $e");
     } finally {
       setState(() {
         isLoading = false;
       });
+
+      
     }
   }
 
@@ -84,99 +92,103 @@ class ListingItemsState extends State<ListingItems> {
         ),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {
-                  pickImage();
-                },
-                child: imageFile != null
-                    ? Container(
-                        height: 200,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            image: FileImage(File(imageFile!.path)),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      )
-                    : Container(
-                        height: 200,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.grey,
-                        ),
-                        child: Icon(
-                          Icons.add_a_photo,
-                          size: 50,
-                          color: Colors.white,
-                        ),
-                      ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Text('Item Name',
-                  style: GoogleFonts.bebasNeue(
-                    fontSize: 18,
-                    color: Colors.black,
-                  )),
-              CustomInputField(
-                controller: itemNameController,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Text('Item Details',
-                  style: GoogleFonts.bebasNeue(
-                    fontSize: 18,
-                    color: Colors.black,
-                  )),
-              CustomInputField(
-                controller: itemDesController,
-                maxLines: 2,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Text('Item Price',
-                  style: GoogleFonts.bebasNeue(
-                    fontSize: 18,
-                    color: Colors.black,
-                  )),
-              CustomInputField(
-                controller: itemPriController,
-              ),
-              const SizedBox(
-                height: 70,
-              ),
-              Button(
-                  text: 'List item',
-                  onTap: () {
-                    if (itemNameController.text.isNotEmpty &&
-                        itemDesController.text.isNotEmpty &&
-                        itemPriController.text.isNotEmpty) {
-                      uploadData();
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please fill all fields'),
-                        ),
-                      );
-                    }
-                  })
-            ],
-          ),
-        )),
-      ),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SingleChildScrollView(
+              child: SafeArea(
+                  child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        pickImage();
+                      },
+                      child: imageFile != null
+                          ? Container(
+                              height: 200,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                  image: FileImage(File(imageFile!.path)),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            )
+                          : Container(
+                              height: 200,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.grey,
+                              ),
+                              child: Icon(
+                                Icons.add_a_photo,
+                                size: 50,
+                                color: Colors.white,
+                              ),
+                            ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Text('Item Name',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 18,
+                          color: Colors.black,
+                        )),
+                    CustomInputField(
+                      controller: itemNameController,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text('Item Details',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 18,
+                          color: Colors.black,
+                        )),
+                    CustomInputField(
+                      controller: itemDesController,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text('Item Price',
+                        style: GoogleFonts.bebasNeue(
+                          fontSize: 18,
+                          color: Colors.black,
+                        )),
+                    CustomInputField(
+                      controller: itemPriController,
+                    ),
+                    const SizedBox(
+                      height: 70,
+                    ),
+                    Button(
+                        text: 'List item',
+                        onTap: () {
+                          if (itemNameController.text.isNotEmpty &&
+                              itemDesController.text.isNotEmpty &&
+                              itemPriController.text.isNotEmpty) {
+                            uploadData();
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Please fill all fields'),
+                              ),
+                            );
+                          }
+                        })
+                  ],
+                ),
+              )),
+            ),
     );
   }
 }

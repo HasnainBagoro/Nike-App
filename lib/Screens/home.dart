@@ -99,7 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 197,
                       child: items.isEmpty
-                          ? const Center(child: Text('No items available'))
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                              strokeWidth: 5,
+                              color: Colors.black,
+                              strokeCap: StrokeCap.round,
+                            ))
                           : ListView.builder(
                               itemCount: items.length,
                               itemBuilder: (context, index) {
