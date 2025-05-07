@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nike/Screens/bottom_navbar.dart';
-import 'package:nike/Screens/login_screen.dart';
+import 'package:nike/controllers/splashcontroller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,25 +14,26 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
   @override
-  void initState() {
-    manageSession();
-    super.initState();
-  }
+  // void initState() {
+  //   manageSession();
+  //   super.initState();
+  // }
 
-  manageSession() async {
-    await Future.delayed(Duration(seconds: 3), () {
-      if (auth.currentUser != null && auth.currentUser?.emailVerified == true) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (c) => BottomNavbar()),
-            (route) => false);
-      } else {
-        Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (c) => LoginScreen()), (route) => false);
-      }
-    });
-  }
-
+  // manageSession() async {
+  //   await Future.delayed(Duration(seconds: 3), () {
+  //     if (auth.currentUser != null && auth.currentUser?.emailVerified == true) {
+  //       Navigator.pushAndRemoveUntil(
+  //           context,
+  //           MaterialPageRoute(builder: (c) => BottomNavbar()),
+  //           (route) => false);
+  //     } else {
+  //       Navigator.pushAndRemoveUntil(context,
+  //           MaterialPageRoute(builder: (c) => LoginScreen()), (route) => false);
+  //     }
+  //   });
+  // }
+SplashController splashController = Get.put(SplashController());
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
